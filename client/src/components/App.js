@@ -13,21 +13,21 @@ const Dashboard = () => <h1> Dashboard </h1>;
 const Stories = () => <h1> Stories </h1>;
 
 class App extends Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     blogs: []
-  //   };
-  // }
-  //
-  // handleBlogs = blogs => {
-  //   this.setState({ blogs: blogs });
-  //   console(blogs);
-  // };
+  constructor() {
+    super();
+    this.state = {
+      blogs: []
+    };
+  }
 
-  // handleNewBlog = blog => {
-  //   this.setState({ blogs: [...this.state.blogs, blog] });
-  // };
+  handleBlogs = blogs => {
+    this.setState({ blogs: blogs });
+    console(blogs);
+  };
+
+  handleNewBlog = blog => {
+    this.setState({ blogs: [...this.state.blogs, blog] });
+  };
 
   handledeletedBlog = id => {
     // create a copy of the existing blogs array
@@ -51,14 +51,17 @@ class App extends Component {
             {/*exact property exactly mathces the url currently visited on the port to the one passed to the Route*/}
             <div className="row">
               <div className="col s6">
-                <Form />
+                <Form handleNewBlog={this.handleNewBlog} />
               </div>
               <div className="col s6">
-                <Listing handledeletedBlog={this.handledeletedBlog} />
+                <Listing
+                  blogs={this.state.blogs}
+                  handleBlogs={this.handleBlogs}
+                  handledeletedBlog={this.handledeletedBlog}
+                />
               </div>
             </div>
             <Route path="/dashboard" component={Dashboard} />
-            <Route exact path="/stories" component={Stories} />
           </div>
         </BrowserRouter>
       </div>
